@@ -44,7 +44,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       _model.pollResult = await actions.checkIsCorrectQrCode(
         widget!.qrCode,
       );
-      if ((_model.pollResult != null) != null) {
+      if (_model.pollResult != null) {
         FFAppState().tmpAnswerList = [];
         while (
             _model.tmpAnswerIndex! < _model.pollResult!.questionList.length) {
