@@ -4,25 +4,30 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'test_page_model.dart';
+export 'test_page_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class TestPageWidget extends StatefulWidget {
+  const TestPageWidget({
+    super.key,
+    this.qrCode,
+  });
+
+  final String? qrCode;
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<TestPageWidget> createState() => _TestPageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _TestPageWidgetState extends State<TestPageWidget> {
+  late TestPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => TestPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -46,17 +51,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           children: [
             FFButtonWidget(
               onPressed: () async {
-                context.pushNamed(
-                  'TestPage',
-                  queryParameters: {
-                    'qrCode': serializeParam(
-                      '3232323232',
-                      ParamType.String,
-                    ),
-                  }.withoutNulls,
-                );
+                context.safePop();
               },
-              text: 'gotonext',
+              text: 'back',
               options: FFButtonOptions(
                 height: 40.0,
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -70,6 +67,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 elevation: 0.0,
                 borderRadius: BorderRadius.circular(8.0),
               ),
+            ),
+            Text(
+              valueOrDefault<String>(
+                widget!.qrCode,
+                '-',
+              ),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Inter',
+                    letterSpacing: 0.0,
+                  ),
             ),
           ],
         ),
