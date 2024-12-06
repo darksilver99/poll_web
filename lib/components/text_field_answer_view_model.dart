@@ -9,6 +9,16 @@ import 'package:provider/provider.dart';
 
 class TextFieldAnswerViewModel
     extends FlutterFlowModel<TextFieldAnswerViewWidget> {
+  ///  Local state fields for this component.
+
+  List<String> tmp = [];
+  void addToTmp(String item) => tmp.add(item);
+  void removeFromTmp(String item) => tmp.remove(item);
+  void removeAtIndexFromTmp(int index) => tmp.removeAt(index);
+  void insertAtIndexInTmp(int index, String item) => tmp.insert(index, item);
+  void updateTmpAtIndex(int index, Function(String) updateFn) =>
+      tmp[index] = updateFn(tmp[index]);
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.
