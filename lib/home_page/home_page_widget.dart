@@ -459,7 +459,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           );
                                         },
                                       );
-                                      context.safePop();
+
+                                      context.goNamed('FinishPollPage');
                                     }
                                   },
                                   text: 'ส่งข้อมูล',

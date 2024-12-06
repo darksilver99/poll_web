@@ -62,10 +62,12 @@ class _TextFieldAnswerViewWidgetState extends State<TextFieldAnswerViewWidget> {
             FFAppState().updateTmpAnswerListAtIndex(
               widget!.itemIndex!,
               (e) => e
-                ..answer = (String answer) {
-                  return [answer];
-                }(_model.textController.text)
-                    .toList(),
+                ..answer = _model.textController.text != null &&
+                        _model.textController.text != ''
+                    ? ((String answer) {
+                        return [answer];
+                      }(_model.textController.text))
+                    : ([]).toList(),
             );
           },
         ),
