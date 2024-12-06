@@ -67,7 +67,7 @@ class _TextFieldAnswerViewWidgetState extends State<TextFieldAnswerViewWidget> {
                     ? ((String answer) {
                         return [answer];
                       }(_model.textController.text))
-                    : ([]).toList(),
+                    : _model.tmp.toList(),
             );
           },
         ),
