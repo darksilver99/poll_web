@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "939544849346",
+    "project_id": "polls-manage-jeyxy2",
+    "storage_bucket": "polls-manage-jeyxy2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939544849346:android:38ba493f548fe623cd045b",
+        "android_client_info": {
+          "package_name": "com.silver.pollsmanage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlnSVYqyOkV0x-hBb7EF4BIAGhbJPypU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939544849346:android:d9fa51f3e6af5942cd045b",
+        "android_client_info": {
+          "package_name": "com.silver.pollweb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlnSVYqyOkV0x-hBb7EF4BIAGhbJPypU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
