@@ -54,6 +54,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'FinishPollPage',
+          path: '/finishPollPage',
+          builder: (context, params) => FinishPollPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
