@@ -45,13 +45,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => HomePageWidget(),
-        ),
-        FFRoute(
-          name: 'TestPage',
-          path: '/testPage',
-          builder: (context, params) => TestPageWidget(
+          path: '/HomePage',
+          builder: (context, params) => HomePageWidget(
             qrCode: params.getParam(
               'qrCode',
               ParamType.String,
