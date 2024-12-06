@@ -443,22 +443,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           },
                                         ),
                                       });
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title:
-                                                Text('ส่งข้อมูลเรียบร้อยแล้ว'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('ตกลง'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
 
                                       context.goNamed('FinishPollPage');
                                     }
