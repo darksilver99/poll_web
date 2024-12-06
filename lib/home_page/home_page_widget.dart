@@ -345,7 +345,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             .type ==
                                                         2) {
                                                       return Container(
-                                                        height: 200.0,
                                                         child:
                                                             RadioAnswerViewWidget(
                                                           key: Key(
@@ -359,7 +358,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       );
                                                     } else {
                                                       return Container(
-                                                        height: 200.0,
                                                         child:
                                                             CheckboxAnswerViewWidget(
                                                           key: Key(
