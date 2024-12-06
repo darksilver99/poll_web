@@ -45,7 +45,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'HomePage',
-          path: '/homePage',
+          path: '/homePage/:qrCode',
           builder: (context, params) => HomePageWidget(
             qrCode: params.getParam(
               'qrCode',
