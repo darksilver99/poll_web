@@ -122,7 +122,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               kBreakpointMedium) {
                             return MediaQuery.sizeOf(context).width;
                           } else {
-                            return (MediaQuery.sizeOf(context).width * 0.8);
+                            return 800.0;
                           }
                         }(),
                         decoration: BoxDecoration(
