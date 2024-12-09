@@ -15,28 +15,23 @@ Future<PollListRecord?> checkIsCorrectQrCode(String? qrCode) async {
     return null;
   }
 
-  if (!qrCode.contains("qrCode=")) {
+  if (!qrCode.contains("_")) {
     return null;
   }
 
-  List<String> tmp = qrCode.split("qrCode=");
+  List<String> tmp = qrCode.split("_");
 
-  if (tmp[1] == "") {
+  if (tmp.length != 2) {
     return null;
   }
 
-  List<String> tmp2 = tmp[1].split("_");
-  if (tmp2.length != 2) {
-    return null;
-  }
-
-  if (tmp2[0] == '' || tmp2[1] == '') {
+  if (tmp[0] == "" || tmp[1] == "") {
     return null;
   }
 
   try {
     var rs = await FirebaseFirestore.instance
-        .doc("customer_list/${tmp2[0]}/poll_list/${tmp2[1]}")
+        .doc("customer_list/${tmp[0]}/poll_list/${tmp[1]}")
         .get();
     return PollListRecord.getDocumentFromData(rs.data()!, rs.reference);
   } catch (e) {
