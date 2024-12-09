@@ -182,60 +182,61 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ),
                                   ],
                                 ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 8.0, 0.0, 16.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 8.0, 0.0),
-                                      child: FaIcon(
-                                        FontAwesomeIcons.clock,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
+                              if (_model.pollDocument?.startDate != null)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 8.0, 0.0, 16.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 8.0, 0.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.clock,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        functions.dateTh(_model
-                                                    .pollDocument?.startDate) !=
-                                                functions.dateTh(_model
-                                                    .pollDocument?.endDate)
-                                            ? 'ระยะเวลา ${valueOrDefault<String>(
-                                                functions.dateTh(_model
-                                                    .pollDocument?.startDate),
-                                                '-',
-                                              )} - ${valueOrDefault<String>(
-                                                functions.dateTh(_model
-                                                    .pollDocument?.endDate),
-                                                '-',
-                                              )}'
-                                            : 'ระยะเวลา ${valueOrDefault<String>(
-                                                functions.dateTh(_model
-                                                    .pollDocument?.startDate),
-                                                '-',
-                                              )}',
-                                        textAlign: TextAlign.start,
-                                        maxLines: 1,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 14.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
+                                      Expanded(
+                                        child: Text(
+                                          functions.dateTh(_model.pollDocument
+                                                      ?.startDate) !=
+                                                  functions.dateTh(_model
+                                                      .pollDocument?.endDate)
+                                              ? 'ระยะเวลา ${valueOrDefault<String>(
+                                                  functions.dateTh(_model
+                                                      .pollDocument?.startDate),
+                                                  '-',
+                                                )} - ${valueOrDefault<String>(
+                                                  functions.dateTh(_model
+                                                      .pollDocument?.endDate),
+                                                  '-',
+                                                )}'
+                                              : 'ระยะเวลา ${valueOrDefault<String>(
+                                                  functions.dateTh(_model
+                                                      .pollDocument?.startDate),
+                                                  '-',
+                                                )}',
+                                          textAlign: TextAlign.start,
+                                          maxLines: 1,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
                               Divider(
                                 thickness: 2.0,
                                 color: FlutterFlowTheme.of(context).alternate,
