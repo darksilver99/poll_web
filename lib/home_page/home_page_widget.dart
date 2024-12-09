@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -125,6 +126,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             return 800.0;
                           }
                         }(),
+                        constraints: BoxConstraints(
+                          minHeight: MediaQuery.sizeOf(context).height * 1.0,
+                        ),
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -479,6 +483,58 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   ),
                 ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: RichText(
+                        textScaler: MediaQuery.of(context).textScaler,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '© 2024 ',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            TextSpan(
+                              text: 'Anusorn Kongthong. ',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              mouseCursor: SystemMouseCursors.click,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  await launchURL(
+                                      'https://anusorn-profile.web.app');
+                                },
+                            ),
+                            TextSpan(
+                              text: 'All rights reserved.',
+                              style: TextStyle(),
+                            )
+                          ],
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
