@@ -12,9 +12,11 @@ class AnswerDataStruct extends FFFirebaseStruct {
   AnswerDataStruct({
     List<String>? answer,
     int? questionType,
+    String? topicId,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _answer = answer,
         _questionType = questionType,
+        _topicId = topicId,
         super(firestoreUtilData);
 
   // "answer" field.
@@ -38,10 +40,18 @@ class AnswerDataStruct extends FFFirebaseStruct {
 
   bool hasQuestionType() => _questionType != null;
 
+  // "topic_id" field.
+  String? _topicId;
+  String get topicId => _topicId ?? '';
+  set topicId(String? val) => _topicId = val;
+
+  bool hasTopicId() => _topicId != null;
+
   static AnswerDataStruct fromMap(Map<String, dynamic> data) =>
       AnswerDataStruct(
         answer: getDataList(data['answer']),
         questionType: castToType<int>(data['question_type']),
+        topicId: data['topic_id'] as String?,
       );
 
   static AnswerDataStruct? maybeFromMap(dynamic data) => data is Map
@@ -51,6 +61,7 @@ class AnswerDataStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'answer': _answer,
         'question_type': _questionType,
+        'topic_id': _topicId,
       }.withoutNulls;
 
   @override
@@ -63,6 +74,10 @@ class AnswerDataStruct extends FFFirebaseStruct {
         'question_type': serializeParam(
           _questionType,
           ParamType.int,
+        ),
+        'topic_id': serializeParam(
+          _topicId,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -78,6 +93,11 @@ class AnswerDataStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
+        topicId: deserializeParam(
+          data['topic_id'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -88,15 +108,18 @@ class AnswerDataStruct extends FFFirebaseStruct {
     const listEquality = ListEquality();
     return other is AnswerDataStruct &&
         listEquality.equals(answer, other.answer) &&
-        questionType == other.questionType;
+        questionType == other.questionType &&
+        topicId == other.topicId;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([answer, questionType]);
+  int get hashCode =>
+      const ListEquality().hash([answer, questionType, topicId]);
 }
 
 AnswerDataStruct createAnswerDataStruct({
   int? questionType,
+  String? topicId,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -104,6 +127,7 @@ AnswerDataStruct createAnswerDataStruct({
 }) =>
     AnswerDataStruct(
       questionType: questionType,
+      topicId: topicId,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
