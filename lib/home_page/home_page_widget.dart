@@ -55,6 +55,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             questionType:
                 (_model.pollDocument?.questionList?[_model.tmpAnswerIndex!])
                     ?.type,
+            topicId:
+                (_model.pollDocument?.questionList?[_model.tmpAnswerIndex!])
+                    ?.topicId,
           ));
           safeSetState(() {});
           _model.tmpAnswerIndex = _model.tmpAnswerIndex! + 1;
@@ -535,7 +538,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ],
                 ),
               ),
-            ],
+            ].addToEnd(SizedBox(height: 16.0)),
           ),
         ),
       ),
