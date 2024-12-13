@@ -26,16 +26,6 @@ class PollListRecord extends FirestoreRecord {
   String get detail => _detail ?? '';
   bool hasDetail() => _detail != null;
 
-  // "start_date" field.
-  DateTime? _startDate;
-  DateTime? get startDate => _startDate;
-  bool hasStartDate() => _startDate != null;
-
-  // "end_date" field.
-  DateTime? _endDate;
-  DateTime? get endDate => _endDate;
-  bool hasEndDate() => _endDate != null;
-
   // "question_list" field.
   List<QuestionDataStruct>? _questionList;
   List<QuestionDataStruct> get questionList => _questionList ?? const [];
@@ -46,18 +36,22 @@ class PollListRecord extends FirestoreRecord {
   int get totalAnswer => _totalAnswer ?? 0;
   bool hasTotalAnswer() => _totalAnswer != null;
 
+  // "max_answer" field.
+  int? _maxAnswer;
+  int get maxAnswer => _maxAnswer ?? 0;
+  bool hasMaxAnswer() => _maxAnswer != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _subject = snapshotData['subject'] as String?;
     _detail = snapshotData['detail'] as String?;
-    _startDate = snapshotData['start_date'] as DateTime?;
-    _endDate = snapshotData['end_date'] as DateTime?;
     _questionList = getStructList(
       snapshotData['question_list'],
       QuestionDataStruct.fromMap,
     );
     _totalAnswer = castToType<int>(snapshotData['total_answer']);
+    _maxAnswer = castToType<int>(snapshotData['max_answer']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -102,17 +96,15 @@ class PollListRecord extends FirestoreRecord {
 Map<String, dynamic> createPollListRecordData({
   String? subject,
   String? detail,
-  DateTime? startDate,
-  DateTime? endDate,
   int? totalAnswer,
+  int? maxAnswer,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'subject': subject,
       'detail': detail,
-      'start_date': startDate,
-      'end_date': endDate,
       'total_answer': totalAnswer,
+      'max_answer': maxAnswer,
     }.withoutNulls,
   );
 
@@ -127,21 +119,14 @@ class PollListRecordDocumentEquality implements Equality<PollListRecord> {
     const listEquality = ListEquality();
     return e1?.subject == e2?.subject &&
         e1?.detail == e2?.detail &&
-        e1?.startDate == e2?.startDate &&
-        e1?.endDate == e2?.endDate &&
         listEquality.equals(e1?.questionList, e2?.questionList) &&
-        e1?.totalAnswer == e2?.totalAnswer;
+        e1?.totalAnswer == e2?.totalAnswer &&
+        e1?.maxAnswer == e2?.maxAnswer;
   }
 
   @override
-  int hash(PollListRecord? e) => const ListEquality().hash([
-        e?.subject,
-        e?.detail,
-        e?.startDate,
-        e?.endDate,
-        e?.questionList,
-        e?.totalAnswer
-      ]);
+  int hash(PollListRecord? e) => const ListEquality().hash(
+      [e?.subject, e?.detail, e?.questionList, e?.totalAnswer, e?.maxAnswer]);
 
   @override
   bool isValidKey(Object? o) => o is PollListRecord;

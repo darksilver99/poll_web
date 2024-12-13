@@ -7,12 +7,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
@@ -52,12 +50,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             _model.tmpAnswerIndex! < _model.pollDocument!.questionList.length) {
           FFAppState().addToTmpAnswerList(AnswerDataStruct(
             answer: [],
-            questionType:
-                (_model.pollDocument?.questionList?[_model.tmpAnswerIndex!])
-                    ?.type,
-            topicId:
-                (_model.pollDocument?.questionList?[_model.tmpAnswerIndex!])
-                    ?.topicId,
+            questionType: (_model.pollDocument?.questionList
+                    ?.elementAtOrNull(_model.tmpAnswerIndex!))
+                ?.type,
+            topicId: (_model.pollDocument?.questionList
+                    ?.elementAtOrNull(_model.tmpAnswerIndex!))
+                ?.topicId,
           ));
           safeSetState(() {});
           _model.tmpAnswerIndex = _model.tmpAnswerIndex! + 1;
@@ -189,61 +187,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ),
                                   ],
                                 ),
-                              if (_model.pollDocument?.startDate != null)
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 0.0, 16.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 8.0, 0.0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.clock,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          functions.dateTh(_model.pollDocument
-                                                      ?.startDate) !=
-                                                  functions.dateTh(_model
-                                                      .pollDocument?.endDate)
-                                              ? 'ระยะเวลา ${valueOrDefault<String>(
-                                                  functions.dateTh(_model
-                                                      .pollDocument?.startDate),
-                                                  '-',
-                                                )} - ${valueOrDefault<String>(
-                                                  functions.dateTh(_model
-                                                      .pollDocument?.endDate),
-                                                  '-',
-                                                )}'
-                                              : 'ระยะเวลา ${valueOrDefault<String>(
-                                                  functions.dateTh(_model
-                                                      .pollDocument?.startDate),
-                                                  '-',
-                                                )}',
-                                          textAlign: TextAlign.start,
-                                          maxLines: 1,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               Divider(
                                 thickness: 2.0,
                                 color: FlutterFlowTheme.of(context).alternate,
@@ -281,8 +224,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    if (!_model.passList[
-                                                        questionListViewIndex])
+                                                    if (!_model.passList
+                                                        .elementAtOrNull(
+                                                            questionListViewIndex)!)
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
@@ -404,7 +348,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     while (_model.tmpAnswerIndex! <
                                         FFAppState().tmpAnswerList.length) {
                                       if (FFAppState()
-                                          .tmpAnswerList[_model.tmpAnswerIndex!]
+                                          .tmpAnswerList
+                                          .elementAtOrNull(
+                                              _model.tmpAnswerIndex!)!
                                           .answer
                                           .isNotEmpty) {
                                         _model.updatePassListAtIndex(
@@ -424,36 +370,44 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     if (_model.passList.contains(false)) {
                                       safeSetState(() {});
                                     } else {
-                                      await AnswerListRecord.createDoc(_model
-                                              .pollDocument!.parentReference)
-                                          .set({
-                                        ...createAnswerListRecordData(
-                                          createDate: getCurrentTimestamp,
-                                          pollRef:
-                                              _model.pollDocument?.reference,
-                                        ),
-                                        ...mapToFirestore(
-                                          {
-                                            'answers':
-                                                getAnswerDataListFirestoreData(
-                                              FFAppState().tmpAnswerList,
-                                            ),
-                                          },
-                                        ),
-                                      });
+                                      _model.pollResult2 =
+                                          await PollListRecord.getDocumentOnce(
+                                              _model.pollDocument!.reference);
+                                      if (_model.pollResult2!.totalAnswer <
+                                          _model.pollResult2!.maxAnswer) {
+                                        await AnswerListRecord.createDoc(_model
+                                                .pollDocument!.parentReference)
+                                            .set({
+                                          ...createAnswerListRecordData(
+                                            createDate: getCurrentTimestamp,
+                                            pollRef:
+                                                _model.pollDocument?.reference,
+                                          ),
+                                          ...mapToFirestore(
+                                            {
+                                              'answers':
+                                                  getAnswerDataListFirestoreData(
+                                                FFAppState().tmpAnswerList,
+                                              ),
+                                            },
+                                          ),
+                                        });
 
-                                      await _model.pollDocument!.reference
-                                          .update({
-                                        ...mapToFirestore(
-                                          {
-                                            'total_answer':
-                                                FieldValue.increment(1),
-                                          },
-                                        ),
-                                      });
+                                        await _model.pollDocument!.reference
+                                            .update({
+                                          ...mapToFirestore(
+                                            {
+                                              'total_answer':
+                                                  FieldValue.increment(1),
+                                            },
+                                          ),
+                                        });
+                                      }
 
                                       context.goNamed('FinishPollPage');
                                     }
+
+                                    safeSetState(() {});
                                   },
                                   text: 'ส่งข้อมูล',
                                   options: FFButtonOptions(
