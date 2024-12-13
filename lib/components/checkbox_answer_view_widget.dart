@@ -66,9 +66,11 @@ class _CheckboxAnswerViewWidgetState extends State<CheckboxAnswerViewWidget> {
                   Builder(
                     builder: (context) {
                       if (FFAppState()
-                          .tmpAnswerList[widget!.itemIndex!]
-                          .answer
-                          .contains(optionListViewItem)) {
+                              .tmpAnswerList
+                              .elementAtOrNull(widget!.itemIndex!)
+                              ?.answer
+                              ?.contains(optionListViewItem) ??
+                          false) {
                         return Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 8.0, 0.0),

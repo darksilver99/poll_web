@@ -20,7 +20,8 @@ class CheckboxAnswerViewModel
     String? answer,
   }) async {
     if (FFAppState()
-        .tmpAnswerList[widget!.itemIndex!]
+        .tmpAnswerList
+        .elementAtOrNull(widget!.itemIndex!)!
         .answer
         .contains(answer)) {
       FFAppState().updateTmpAnswerListAtIndex(
